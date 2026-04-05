@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricelist Accurate Online - PT. Cipta Piranti Sejahtera</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: #007bff; color: white; text-align: center; padding: 40px 20px; }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { color: #007bff; margin: 30px 0 20px; }
+        .calculator { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 20px 0; }
+        label { display: block; margin: 15px 0; font-weight: bold; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; max-width: 200px; }
+        button { background: #28a745; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 10px 0; }
+        button:hover { background: #218838; }
+        #total { font-size: 1.5em; font-weight: bold; color: #007bff; margin-top: 20px; }
+        .payment { background: #e7f3ff; padding: 25px; border-radius: 10px; margin: 30px 0; border-left: 5px solid #007bff; }
+        .conditions { background: #fff3cd; padding: 25px; border-radius: 10px; margin: 30px 0; }
+        ul { margin-left: 20px; }
+        footer { background: #343a40; color: white; text-align: center; padding: 30px; margin-top: 50px; }
+        .date { font-weight: bold; color: #dc3545; }
+        @media (max-width: 768px) { h1 { font-size: 2em; } .calculator { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pricelist Berlangganan Accurate Online</h1>
+        <p>Hitung harga custom Anda sekarang</p>
+    </header>
+    
+    <div class="container">
+        <section class="calculator">
+            <h2>Perhitungan Harga</h2>
+            <label>Accurate Online 1 Tahun (Basic): <strong>Rp 3.219.000</strong> (Promo 2026, 1 User Master)</label>
+            <label>User Tambahan: <input type="number" id="users" min="0" value="0"> x Rp 266.400</label>
+            <label>Add-on Cabang: <input type="number" id="cabang" min="0" value="0"> x Rp 999.000 (diskon)</label>
+            <label>Add-on POS: <input type="number" id="pos" min="0" value="0"> x Rp 999.000 (diskon)</label>
+            <label>Add-on Cost Profit: <input type="number" id="profit" min="0" value="0"> x Rp 1.332.000</label>
+            <button onclick="hitung()">Hitung Total</button>
+            <div id="total">Total: Rp 3.219.000</div>
+        </section>
+
+        <section class="payment">
+            <h2>Pilihan Metode Pembayaran</h2>
+            <p><strong>Transfer Bank BCA</strong><br>
+            KCP Daan Mogot<br>
+            1988 00 9911<br>
+            a.n PT. CIPTA PIRANTI SEJAHTERA</p>
+        </section>
+
+        <section class="conditions">
+            <h2>Aturan dan Kondisi</h2>
+            <p>Faktur Proforma ini berlaku sampai dengan <span class="date" id="expiryDate"></span>. Jika lebih dari tanggal tersebut, minta Faktur baru ke Agen.</p>
+            <ul>
+                <li>Pembayaran valid hanya ke rekening & jumlah yang disebutkan di atas.</li>
+                <li>Nilai pembayaran Non-Refundable.</li>
+                <li>TIDAK gunakan giro.</li>
+                <li>Garansi: email <a href="mailto:support@cpssoft.com">support@cpssoft.com</a></li>
+                <li>Harga tidak termasuk instalasi/training.</li>
+                <li>Prepaid/add-on: tunggu 90 hari. <a href="https://accurate.id/informasi/pengguna/perubahan-ketentuan-paket-aktivasi-add-on-accurate/">Info Masa Tunggu</a></li>
+                <li>Implementasi: <a href="https://cpssoft.com/partner/#implementasi">Hubungi Partner</a></li>
+            </ul>
+            <p><strong>PT. Cipta Piranti Sejahtera</strong><br>
+            Komplek Ruko The Element, Jl Jalur Sutera B19-21 No.25BC<br>
+            Pakualam, Serpong Utara, Kota Tangerang Selatan, Banten<br>
+            NPWP: 075.406.790.8-029.000</p>
+        </section>
+    </div>
+
+    <footer>
+        <p><a href="http://cpssoft.com/" style="color: #fff;">CPSSoft © All rights reserved</a></p>
+    </footer>
+
+    <script>
+        // Kalkulator dari data Excel
+        function hitung() {
+            const basic = 3219000;
+            const users = parseInt(document.getElementById('users').value || 0) * 266400;
+            const cabang = parseInt(document.getElementById('cabang').value || 0) * 999000;
+            const pos = parseInt(document.getElementById('pos').value || 0) * 999000;
+            const profit = parseInt(document.getElementById('profit').value || 0) * 1332000;
+            const total = basic + users + cabang + pos + profit;
+            document.getElementById('total').innerHTML = 'Total Harga Final: Rp ' + total.toLocaleString('id-ID');
+        }
+
+        // Tanggal H+7 otomatis (April 2026)
+        const today = new Date('2026-04-05');
+        today.setDate(today.getDate() + 7);
+        document.getElementById('expiryDate').textContent = today.toLocaleDateString('id-ID');
+    </script>
+</body>
+</html>
